@@ -128,7 +128,7 @@
 
 import axios from 'axios';
 
-const WPGRAPHQL_URL = process.env.NEXT_PUBLIC_WPGRAPHQL_URL || 'https://newsindia24x7.com/graphql';
+const WPGRAPHQL_URL = process.env.NEXT_PUBLIC_WPGRAPHQL_URL || 'https://newsindia24x7.tv/graphql';
 
 // ✅ EXISTING FUNCTIONS (as they are)
 export async function getHeaderCategories() {

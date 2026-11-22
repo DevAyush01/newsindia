@@ -134,7 +134,7 @@ export default async function PostPage({ params }) {
                 <h3 className="text-sm font-semibold text-gray-600 mb-3">Share this article:</h3>
                 <div className="flex flex-wrap gap-3">
                   <a 
-                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://newsindia24x7.com/post/${post.slug}`)}`}
+                    href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://newsindia24x7.tv/post/${post.slug}`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition"
@@ -142,7 +142,7 @@ export default async function PostPage({ params }) {
                     Facebook
                   </a>
                   <a 
-                    href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(`https://newsindia24x7.com/post/${post.slug}`)}&text=${encodeURIComponent(post.title)}`}
+                    href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(`https://newsindia24x7.tv/post/${post.slug}`)}&text=${encodeURIComponent(post.title)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-sky-500 hover:bg-sky-600 text-white px-4 py-2 rounded-lg text-sm transition"
@@ -150,7 +150,7 @@ export default async function PostPage({ params }) {
                     Twitter
                   </a>
                   <a 
-                    href={`https://wa.me/?text=${encodeURIComponent(`${post.title} - https://newsindia24x7.com/post/${post.slug}`)}`}
+                    href={`https://wa.me/?text=${encodeURIComponent(`${post.title} - https://newsindia24x7.tv/post/${post.slug}`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg text-sm transition"
