@@ -32,7 +32,7 @@ export default function SportsSection({ sportsData }) {
   const bottomPosts = sportsData.slice(5, 9);
 
   return (
-   <div className="container mx-auto ">
+   <div className="container mx-auto py-1">
   {/* Header */}
   <div className="flex justify-between items-center mb-3">
     <div className="flex items-center gap-2">

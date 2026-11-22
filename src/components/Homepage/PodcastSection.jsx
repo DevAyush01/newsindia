@@ -104,7 +104,7 @@ export default async function PodcastSection() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
         {podcasts.slice(0, 4).map((podcast) => (
           <Link key={podcast.id} href={`/podcast/${podcast.slug}`} className="group block">
-            <article className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 h-full">
+            <article className="bg-white  overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 h-full">
               {/* Thumbnail with Play Button */}
               <div className="relative aspect-video overflow-hidden bg-gray-100">
                 {podcast.thumbnailUrl ? (

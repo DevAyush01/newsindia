@@ -1,4 +1,4 @@
-// components/TrendingSlider.jsx - ✅ Swiper with Cache
+// components/TrendingSlider.jsx - ✅ Swiper with Cache & Title
 
 "use client";
 
@@ -68,6 +68,17 @@ export default function TrendingSlider() {
     <section className=" bg-white max-w-7xl mx-auto">
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center gap-3">
+          
+          {/* ✅ NAYA: Trending News Title (Left Side) */}
+          <div className="flex shrink-0 flex-col justify-center border-r border-zinc-300 pr-3 md:pr-4 mr-1">
+            <span className="text-[15px] md:text-[16px] font-extrabold text-black uppercase tracking-wide leading-none">
+              Trending
+            </span>
+            <span className="text-[11px] md:text-[12px] font-bold text-red-600 uppercase tracking-widest leading-none mt-1">
+              News
+            </span>
+          </div>
+
           {/* Prev Button */}
           <button
             onClick={() => swiperRef.current?.slidePrev()}

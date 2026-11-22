@@ -49,9 +49,9 @@ export default async function page() {
       {/* ✅ Pass breakingNews as prop */}
       <BreakingSectionTop breakingNews={breakingNews} />
 
-      <TrendingSlider />
       
       <FirstTopSection />
+      <TrendingSlider />
 
       <BadiKhabre/>
       <VideoSection />

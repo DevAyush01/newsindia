@@ -29,7 +29,7 @@ export default function DharmSection({ religiousData, rasifalData }) {
   }
 
   return (
-    <section className="container max-w-7xl mx-auto py-2">
+    <section className="container max-w-7xl mx-auto ">
       
       {/* Header */}
       <div className="flex justify-between items-center mb-4">

@@ -8,6 +8,11 @@ import BreakingSlider from "./BreakingSlider";
 export default async function FirstTopSection() {
   const data = await getHomeTopSection();
   const breakingNews = await getBreakingNews(8);
+
+  const [coverStoryTop, coverStoryBig] = await Promise.all([
+  getPostsByCategory("cover-story-top",6),
+  getPostsByCategory("cover-story-big", 3),
+]);
   
 
 
@@ -143,8 +148,38 @@ const liveTvNews = [...(data.featured || []), ...(data.latest || [])].slice(0, 4
             ))}
           </div>
 
-          {/* BREAKING SECTION */}
-          <BreakingSlider breakingNews={breakingNews} />
+          {/* BREAKING SECTION - commented */}
+{/* <BreakingSlider breakingNews={breakingNews} /> */}
+
+{/* BADI KHABRE - CENTER (3 image posts) */}
+{/* BADI KHABRE - CENTER (exact same as BadiKhabre.jsx) */}
+<div className="mt-6">
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+    {coverStoryBig.slice(0, 3).map((post) => (
+      <Link key={post.id} href={`/post/${post.slug}`}>
+        <article className="group cursor-pointer bg-[#F5F5F5] border border-[#d1d1d1] h-auto lg:h-80">
+          <div className="relative aspect-[16/10] overflow-hidden bg-gray-100">
+            {post.featuredImage?.node?.sourceUrl ? (
+              <Image
+                src={post.featuredImage.node.sourceUrl}
+                alt={post.title}
+                fill
+                className="object-fill"
+              />
+            ) : (
+              <div className="bg-gray-200 w-full h-full flex items-center justify-center">
+                <span className="text-gray-400 text-xs">No Image</span>
+              </div>
+            )}
+          </div>
+          <h3 className="mt-2 sm:mt-3 text-[15px] sm:text-[15px] p-2 font-bold text-gray-900 group-hover:text-red-600 transition-colors line-clamp-4 sm:line-clamp-6">
+            {post.title}
+          </h3>
+        </article>
+      </Link>
+    ))}
+  </div>
+</div>
         </div>
 
         {/* CENTER - Superfast News */}
@@ -154,10 +189,10 @@ const liveTvNews = [...(data.featured || []), ...(data.latest || [])].slice(0, 4
               <Link href="/superfast" className="flex items-end gap-1 hover:opacity-80 transition">
                 <div className="flex flex-col leading-none">
                   <span className="text-red-600 font-black text-[20px] tracking-tighter leading-none" style={{ fontStyle: "italic" }}>
-                    सुपरफास्ट
+                    फटाफट
                   </span>
                   <div className="flex items-center gap-1 mt-0.5">
-                    <span className="text-gray-700 font-bold text-[12px] tracking-[0.2em] uppercase">NEWS</span>
+                    <span className="text-gray-700 font-bold text-[12px]  uppercase">खबरें</span>
                     <span className="flex gap-px">
                       {[12, 9, 7].map((h, i) => (
                         <span key={i} className="inline-block w-px bg-red-500" style={{ height: h }}></span>
@@ -240,7 +275,7 @@ const liveTvNews = [...(data.featured || []), ...(data.latest || [])].slice(0, 4
             </div>
             <div className="relative bg-black">
               <iframe
-                src="https://www.youtube.com/embed/VECLDoKDOOk?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1"
+                src="https://www.youtube.com/embed/PL_LixxHf50?si=Nwj-UVpeG2k2owKC?autoplay=1&mute=0&controls=1&rel=0&modestbranding=1"
                 className="w-full aspect-video"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; autoplay"
                 allowFullScreen
@@ -248,38 +283,7 @@ const liveTvNews = [...(data.featured || []), ...(data.latest || [])].slice(0, 4
               ></iframe>
             </div>
           </div>
-
-          <div className="rounded-sm border border-gray-200 overflow-hidden bg-white shadow-sm">
-            <div className="bg-gray-100 px-3 py-2 border-b border-gray-200">
-              <h3 className="text-sm font-bold text-gray-700 flex items-center gap-2">
-                <span className="w-1 h-4 bg-red-600 rounded-full"></span>
-                ट्रेंडिंग न्यूज़
-              </h3>
-            </div>
-            <div className="divide-y divide-gray-100">
-              {liveTvNews.slice(0, 4).map((post, idx) => (
-                <Link key={post.id} href={`/post/${post.slug}`}>
-                  <article className="group flex gap-2.5 px-2 py-2 hover:bg-red-50 transition-colors">
-                    <span className="text-red-600 font-bold text-sm min-w-[24px]">
-                      {String(idx + 1).padStart(2, "0")}
-                    </span>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-[15px] font-semibold leading-snug text-gray-800 group-hover:text-red-600 line-clamp-3">
-                       {post.title}
-                      </h3>
-                    </div>
-                  </article>
-                </Link>
-              ))}
-            </div>
-            <div className="border-t border-gray-100 px-3 py-2 bg-gray-50 text-center">
-              <Link href="/latest" className="text-[10px] text-red-600 hover:underline font-semibold inline-flex items-center gap-1">
-                सभी देखें <span>→</span>
-              </Link>
-            </div>
-          </div>
-
-          <div className="flex justify-center">
+           <div className="flex justify-center">
             <a
               href="https://www.google.com/search?q=newsindia24x7.tv"
               target="_blank"
@@ -326,6 +330,52 @@ const liveTvNews = [...(data.featured || []), ...(data.latest || [])].slice(0, 4
               ))}
             </div>
           )}
+
+        <div className="rounded-sm border border-gray-200 overflow-hidden bg-white shadow-sm">
+  <div className="bg-gray-100 px-3 py-2 border-b border-gray-200">
+    <div className="flex items-center gap-2">
+      <span className="w-0 h-0 border-t-[7px] border-b-[7px] border-l-[10px] border-t-transparent border-b-transparent border-l-red-600"></span>
+      <h3 className="text-sm font-bold text-black">बड़ी खबरें</h3>
+    </div>
+  </div>
+  <div className="divide-y divide-gray-100">
+    {coverStoryTop.slice(0, 5).map((post) => (
+      <Link key={post.id} href={`/post/${post.slug}`}>
+        <div className="py-3 px-3 cursor-pointer group hover:bg-red-50 transition-colors">
+          <h3 className="text-[15px] leading-6 font-medium text-gray-800 group-hover:text-red-600 transition-colors line-clamp-3">
+            {post.title}
+          </h3>
+        </div>
+      </Link>
+    ))}
+  </div>
+  {/* <div className="border-t border-gray-100 px-3 py-2 bg-gray-50 text-center">
+    <Link href="/latest" className="text-[10px] text-red-600 hover:underline font-semibold inline-flex items-center gap-1">
+      सभी देखें <span>→</span>
+    </Link>
+  </div> */}
+</div>
+
+          {/* <div className="flex justify-center">
+            <a
+              href="https://www.google.com/search?q=newsindia24x7.tv"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full max-w-[330px] h-11 border border-red-500 rounded-lg bg-[#f3f5f7] hover:bg-white transition-all duration-300 flex items-center justify-center gap-2 shadow-sm"
+            >
+              <span className="text-yellow-400 text-xl leading-none">★</span>
+              <span className="text-[15px] font-bold text-gray-900 uppercase tracking-tight">
+                FAV US ON
+              </span>
+              <img
+                src="/google.gif"
+                alt="Google G"
+                className="w-16 h-7"
+              />
+            </a>
+          </div> */}
+
+          
         </div>
       </div>
     </section>

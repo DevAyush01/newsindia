@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-import { getPostsByCategory } from "@/lib/wordpress";
+import { getPostsByCategory, getBreakingNews } from "@/lib/wordpress"; // ✅ getBreakingNews import kiya
+import BreakingSlider from "./BreakingSlider"; // ✅ BreakingSlider import kiya
 
 export default async function BadiKhabre() {
 
@@ -10,11 +11,14 @@ export default async function BadiKhabre() {
     getPostsByCategory("news-latest", 5),
   ]);
 
+  // ✅ Breaking News fetch karo slider ke liye
+  const breakingNews = await getBreakingNews(8);
+
   return (
     <section className="container max-w-7xl mx-auto py-5 px-4">
         <div className="flex items-center gap-2 mb-4">
             <span className="w-0 h-0 border-t-[7px] border-b-[7px] border-l-[10px] border-t-transparent border-b-transparent border-l-red-600"></span>
-            <h2 className="text-lg font-bold text-black">बड़ी खबरें</h2>
+            <h2 className="text-lg font-bold text-black">ट्रेंडिंग न्यूज़</h2>
           </div>
       <div className="grid grid-cols-12 gap-5">
         
@@ -22,26 +26,42 @@ export default async function BadiKhabre() {
         {/* LEFT - बड़ी खबरें (Text Only with Borders) */}
         {/* ========================================================= */}
         <div className="col-span-12 lg:col-span-3">
-          <div>
-            {coverStoryTop.slice(0, 4).map((post, index) => (
-              <Link key={post.id} href={`/post/${post.slug}`}>
-                <div
-                  className={`py-4 cursor-pointer group px-1 rounded ${
-                    index !== 4 ? "border-b border-gray-200" : ""
-                  }`}
-                >
-                  <h3 className="text-[16px] leading-6 font-medium text-gray-800 group-hover:text-red-600 transition-colors">
-                    {post.title}
-                  </h3>
-                </div>
+          <div className="rounded-sm border border-gray-200 overflow-hidden bg-white shadow-sm">
+            <div className="divide-y px-3 py-2 divide-gray-100">
+              {newsLatest.slice(0, 4).map((post, idx) => (
+                <Link key={post.id} href={`/post/${post.slug}`}>
+                  <article className="group flex gap-2.5 px-2 py-2 hover:bg-red-50 transition-colors">
+                    <span className="text-red-600 font-bold text-sm min-w-[24px]">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-[15px] font-semibold leading-snug text-gray-800 group-hover:text-red-600 line-clamp-3">
+                        {post.title}
+                      </h3>
+                    </div>
+                  </article>
+                </Link>
+              ))}
+            </div>
+            <div className="border-t border-gray-100 px-3 py-2 bg-gray-50 text-center">
+              <Link href="/latest" className="text-[10px] text-red-600 hover:underline font-semibold inline-flex items-center gap-1">
+                सभी देखें <span>→</span>
               </Link>
-            ))}
+            </div>
           </div>
         </div>
 
         {/* ========================================================= */}
-        {/* CENTER - Image News (Mobile: 1 column, Tablet: 2, Desktop: 3) */}
+        {/* NAYA: BREAKING SLIDER (Middle & Right ki jagah) */}
         {/* ========================================================= */}
+            <div className="col-span-12 lg:col-span-9">
+          <BreakingSlider breakingNews={breakingNews} />
+        </div>
+
+        {/* ========================================================= */}
+        {/* CENTER - Image News (COMMENTED) */}
+        {/* ========================================================= */}
+        {/* 
         <div className="col-span-12 lg:col-span-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {coverStoryBig.slice(0, 3).map((post) => (
@@ -69,14 +89,16 @@ export default async function BadiKhabre() {
             ))}
           </div>
         </div>
+        */}
 
         {/* ========================================================= */}
-        {/* RIGHT - इंडिया टुडे विशेष (With Red Border) */}
+        {/* RIGHT - न्यूज़ इंडिया 24x7 (COMMENTED) */}
         {/* ========================================================= */}
+        {/* 
         <div className="col-span-12 lg:col-span-4 mt-4 lg:mt-0">
           <div className="border-t-4 border-b-4 border-l-[10px] border-r-[10px] border-red-600 p-4 bg-white rounded-sm">
             <h2 className="text-lg font-bold mb-4">
-              <span className="text-red-600">इंडिया टुडे</span>{" "}
+              <span className="text-red-600">न्यूज़ इंडिया 24x7</span>{" "}
               <span className="text-gray-900">विशेष</span>
             </h2>
 
@@ -115,8 +137,9 @@ export default async function BadiKhabre() {
               </Link>
             </div>
           </div>
-          
         </div>
+        */}
+
       </div>
     </section>
   );

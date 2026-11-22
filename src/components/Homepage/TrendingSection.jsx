@@ -80,7 +80,7 @@ export default async function TrendingSection() {
           <div className="grid md:grid-cols-2 gap-5">
             {allPosts.map((post) => (
               <Link key={post.id} href={`/post/${post.slug}`} className="group block">
-                <div className="bg-white rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100 h-full">
+                <div className="bg-white  overflow-hidden hover:shadow-lg transition-shadow duration-300 border border-gray-100 h-full">
                   
                   {/* Thumbnail - Height 260px */}
                   <div className="relative h-[260px] bg-gray-100">
@@ -101,11 +101,11 @@ export default async function TrendingSection() {
                     )}
                     
                     {/* Category Badge */}
-                    <div className="absolute top-2 left-2 z-10">
+                    {/* <div className="absolute top-2 left-2 z-10">
                       <span className="bg-red-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full">
                         {post.categories?.nodes?.[0]?.name || 'News'}
                       </span>
-                    </div>
+                    </div> */}
                   </div>
                   
                   {/* Content - Padding 4px */}
